@@ -54,6 +54,33 @@ body{position:relative;overflow-x:hidden}
 
 .card.test{position:relative;overflow:hidden}
 .card.test::after{content:"Em fase de teste";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;transform:rotate(-24deg);font-family:Fraunces,Georgia,serif;font-weight:700;font-size:clamp(1.8rem,5vw,3rem);white-space:nowrap;color:var(--text);opacity:.08;pointer-events:none;user-select:none}
+
+.hbtn{background:none;border:1px solid var(--line);border-radius:4px;color:var(--text);font:inherit;font-size:.85rem;padding:7px 14px;cursor:pointer}
+.hbtn:hover{border-color:var(--gold)}
+main[hidden]{display:none}
+.panel{background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--gold);border-radius:6px;padding:22px;margin:20px 0}
+.narrow{max-width:380px;margin:36px auto}
+.panel h2{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:1.1rem;margin:0 0 6px}
+label{display:block;font-size:.78rem;color:var(--muted);margin:12px 0 4px}
+input[type=text],input[type=email],input[type=password]{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:4px;background:var(--bg);color:var(--text);font:inherit;font-size:.9rem}
+input:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
+.checks{display:flex;gap:18px;flex-wrap:wrap;margin-top:6px}
+.checks label{display:flex;align-items:center;gap:6px;color:var(--text);font-size:.88rem;margin:0}
+button.btn{border:0;cursor:pointer;font-family:inherit}
+button.btn.ghost{border:1px solid var(--line);background:none}
+.msg{font-size:.82rem;margin:10px 0 0;min-height:1.2em;color:var(--gold)}
+.msg.err{color:#e5736a}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:600px){.row2{grid-template-columns:1fr}}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.86rem}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line)}
+th{color:var(--muted);font-weight:600;font-size:.75rem}
+.trash{background:none;border:0;cursor:pointer;color:var(--muted);padding:6px;border-radius:4px;line-height:0}
+.trash:hover{color:#e5736a}
+.badge{display:inline-block;font-size:.75rem;font-weight:700;padding:4px 11px;border-radius:999px}
+.badge.ok{background:rgba(46,160,100,.18);color:#3fb97a}
+.badge.no{background:var(--line);color:var(--muted)}
 </style>
 </head>
 <body>
@@ -82,14 +109,14 @@ body{position:relative;overflow-x:hidden}
 <div class="wrap">
   <header>
     <div class="brand">Target <span>Treinamento</span></div>
-    <a class="login" href="https://viabilidade.target-treinamento.com.br">Já sou aluno</a>
+    <button class="hbtn" id="hBtn" type="button">Entrar</button>
   </header>
 
+  <main id="vPublic">
   <section class="hero">
     <h1>Cursos práticos para decidir e executar melhor seus projetos</h1>
     <p>Dois cursos online para quem trabalha com projetos e obras. Escolha o seu e comece hoje.</p>
   </section>
-
   <section class="courses">
     <article class="card">
       <h2>Análise de Viabilidade Econômico-Financeira de Projetos</h2>
@@ -108,7 +135,8 @@ body{position:relative;overflow-x:hidden}
       <div class="buy">
         <div class="price">R$ 000,00<small>pagamento único</small></div>
         <div class="btns">
-          <a class="btn primary" href="https://targetriorj.hotmart.host/analise-de-viabilidade-economico-financeira-de-projetos-594133bb-5cef-4cd5-9a11-d0378a970df7" target="_blank" rel="noopener">Saiba mais</a>
+          <a class="btn ghost" href="https://targetriorj.hotmart.host/analise-de-viabilidade-economico-financeira-de-projetos-594133bb-5cef-4cd5-9a11-d0378a970df7" target="_blank" rel="noopener">Saiba mais</a>
+          <a class="btn primary" href="https://analise-viabilidade-two.vercel.app/" target="_blank" rel="noopener">Acessar</a>
         </div>
       </div>
     </article>
@@ -130,12 +158,142 @@ body{position:relative;overflow-x:hidden}
         <div class="price">R$ 000,00<small>pagamento único</small></div>
         <div class="btns">
           <span class="btn soon" aria-disabled="true">Em breve</span>
+          <a class="btn primary" href="https://analista-de-engenharia.vercel.app/" target="_blank" rel="noopener">Acessar</a>
         </div>
       </div>
     </article>
   </section>
+  </main>
 
-  <footer>© Target Treinamento. Todos os direitos reservados.</footer>
+  <main id="vLogin" hidden>
+    <form class="panel narrow" id="lForm">
+      <h2>Entrar</h2>
+      <label for="lEmail">E-mail</label><input id="lEmail" type="email" autocomplete="username" required>
+      <label for="lSenha">Senha</label><input id="lSenha" type="password" autocomplete="current-password" required>
+      <p class="msg err" id="lMsg"></p>
+      <button class="btn primary" type="submit">Entrar</button>
+      <button class="btn ghost" id="lBack" type="button">Voltar</button>
+    </form>
+  </main>
+
+  <main id="vSetup" hidden>
+    <form class="panel narrow" id="sForm">
+      <h2>Cadastrar administrador</h2>
+      <p class="sub" style="color:var(--muted);font-size:.85rem;margin:0">Esta etapa só pode ser feita uma vez. Depois dela, só o administrador acessa o painel.</p>
+      <label for="sEmail">E-mail do administrador</label><input id="sEmail" type="email" autocomplete="username" required>
+      <label for="sSenha">Senha (mínimo 6 caracteres)</label><input id="sSenha" type="password" autocomplete="new-password" required>
+      <label for="sCodigo">Código de instalação</label><input id="sCodigo" type="password" autocomplete="off" required>
+      <p class="msg" id="sMsg"></p>
+      <button class="btn primary" type="submit">Cadastrar administrador</button>
+      <button class="btn ghost" id="sBack" type="button">Voltar</button>
+    </form>
+  </main>
+
+  <main id="vAluno" hidden>
+    <section class="hero"><h1 id="aTitulo">Meus cursos</h1><p>Os cursos liberados para você aparecem com o status Liberado.</p></section>
+    <section class="courses" id="aCursos"></section>
+  </main>
+
+  <main id="vAdmin" hidden>
+    <form class="panel" id="aForm">
+      <h2>Cadastrar aluno</h2>
+      <div class="row2">
+        <div><label for="nNome">Nome</label><input id="nNome" type="text" required></div>
+        <div><label for="nEmail">E-mail</label><input id="nEmail" type="email" required></div>
+      </div>
+      <div class="row2">
+        <div><label for="nSenha">Senha (mínimo 6 caracteres)</label><input id="nSenha" type="text" autocomplete="off" required></div>
+        <div><label>Curso</label><div class="checks" id="nCursos"></div></div>
+      </div>
+      <p class="msg" id="aMsg"></p>
+      <button class="btn primary" type="submit">Cadastrar</button>
+    </form>
+    <div class="panel">
+      <h2>Alunos cadastrados</h2>
+      <div class="tw"><table><thead><tr><th>Nome</th><th>E-mail</th><th>Cursos</th><th></th></tr></thead><tbody id="aLista"></tbody></table></div>
+    </div>
+  </main>
+
+  <footer>© Target Treinamento. Todos os direitos reservados. <a href="#" id="fSetup" hidden style="color:var(--muted);margin-left:12px">Configurar administrador</a></footer>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SB_URL='COLE_AQUI_A_URL_DO_SUPABASE';
+const SB_KEY='COLE_AQUI_A_CHAVE_ANON_PUBLICA';
+const COURSES=[
+{id:'viabilidade',curto:'Viabilidade',nome:'Análise de Viabilidade Econômico-Financeira de Projetos',desc:'Indicadores financeiros, cenários e análises estratégicas.',url:'https://analise-viabilidade-two.vercel.app/',venda:'https://targetriorj.hotmart.host/analise-de-viabilidade-economico-financeira-de-projetos-594133bb-5cef-4cd5-9a11-d0378a970df7'},
+{id:'engenharia',curto:'Engenharia',nome:'Analista de Engenharia: Controle de Obras',desc:'Orçamentos com BDI, medições de campo e indicadores EVM.',url:'https://analista-de-engenharia.vercel.app/',venda:null}
+];
+const ready=!SB_URL.startsWith('COLE');
+const sb=ready?supabase.createClient(SB_URL,SB_KEY):null;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function views(v){['vPublic','vLogin','vSetup','vAluno','vAdmin'].forEach(x=>$(x).hidden=(x!==v))}
+function nav(logged){$('hBtn').textContent=logged?'Sair':'Entrar';$('hBtn').dataset.m=logged?'out':'in'}
+async function api(method,body){
+ const {data:{session}}=await sb.auth.getSession();
+ const r=await fetch('/api/admin',{method,headers:{'Content-Type':'application/json',Authorization:'Bearer '+session.access_token},body:body?JSON.stringify(body):undefined});
+ return {status:r.status,data:await r.json().catch(()=>({}))};
+}
+async function route(){
+ if(!ready){$('hBtn').hidden=true;views('vPublic');return}
+ const {data:{session}}=await sb.auth.getSession();
+ if(!session){nav(false);views('vPublic');return}
+ nav(true);
+ const r=await api('GET');
+ if(r.status===200){views('vAdmin');loadAdmin(r.data.alunos)}
+ else{await loadAluno(session.user);views('vAluno')}
+}
+async function loadAluno(user){
+ const nome=(user.user_metadata||{}).nome;
+ $('aTitulo').textContent=nome?'Olá, '+nome.split(' ')[0]:'Meus cursos';
+ const {data}=await sb.from('matriculas').select('curso');
+ const mine=(data||[]).map(x=>x.curso);
+ $('aCursos').innerHTML=COURSES.map(c=>{
+  const ok=mine.includes(c.id);
+  const btn=ok?`<a class="btn primary" href="${c.url}" target="_blank" rel="noopener">Acessar</a>`
+   :(c.venda?`<a class="btn ghost" href="${c.venda}" target="_blank" rel="noopener">Saiba mais</a>`:`<span class="btn soon">Em breve</span>`);
+  return `<article class="card"><h2>${c.nome}</h2><p class="sub">${c.desc}</p><div class="buy"><span class="badge ${ok?'ok':'no'}">${ok?'Liberado':'Não adquirido'}</span>${btn}</div></article>`;
+ }).join('');
+}
+function loadAdmin(alunos){
+ $('aLista').innerHTML=alunos.length?alunos.map(a=>`<tr><td>${esc(a.nome||'—')}</td><td>${esc(a.email)}</td><td>${a.cursos.length?a.cursos.map(id=>esc((COURSES.find(c=>c.id===id)||{curto:id}).curto)).join(', '):'—'}</td><td><button class="trash" data-id="${esc(a.id)}" aria-label="Excluir ${esc(a.email)}" title="Excluir"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6M10 11v6M14 11v6"/></svg></button></td></tr>`).join(''):'<tr><td colspan="4">Nenhum aluno cadastrado.</td></tr>';
+}
+async function refreshAdmin(){const r=await api('GET');if(r.status===200)loadAdmin(r.data.alunos)}
+$('nCursos').innerHTML=COURSES.map(c=>`<label><input type="checkbox" value="${c.id}"> ${c.curto}</label>`).join('');
+$('hBtn').onclick=async()=>{if($('hBtn').dataset.m==='out'){await sb.auth.signOut();route()}else{views('vLogin')}};
+$('lBack').onclick=()=>views('vPublic');
+$('lForm').onsubmit=async e=>{
+ e.preventDefault();$('lMsg').textContent='';
+ const {error}=await sb.auth.signInWithPassword({email:$('lEmail').value.trim(),password:$('lSenha').value});
+ if(error){$('lMsg').textContent='E-mail ou senha incorretos.';return}
+ $('lSenha').value='';route();
+};
+$('aForm').onsubmit=async e=>{
+ e.preventDefault();const m=$('aMsg');m.className='msg';m.textContent='Cadastrando...';
+ const cursos=[...document.querySelectorAll('#nCursos input:checked')].map(i=>i.value);
+ const r=await api('POST',{nome:$('nNome').value.trim(),email:$('nEmail').value.trim(),senha:$('nSenha').value,cursos});
+ if(r.status===200){m.textContent='Aluno cadastrado.';$('aForm').reset();refreshAdmin()}
+ else{m.className='msg err';m.textContent=r.data.erro||'Erro ao cadastrar.'}
+};
+$('aLista').onclick=async e=>{
+ const b=e.target.closest('.trash');if(!b)return;
+ if(!confirm('Excluir este aluno? Ele perderá o acesso.'))return;
+ const r=await api('DELETE',{id:b.dataset.id});
+ if(r.status!==200)alert(r.data.erro||'Erro ao excluir');
+ refreshAdmin();
+};
+if(ready){fetch('/api/admin?status=1').then(x=>x.json()).then(d=>{if(d.configured===false)$('fSetup').hidden=false}).catch(()=>{})}
+$('fSetup').onclick=e=>{e.preventDefault();views('vSetup')};
+$('sBack').onclick=()=>views('vPublic');
+$('sForm').onsubmit=async e=>{
+ e.preventDefault();const m=$('sMsg');m.className='msg';m.textContent='Cadastrando...';
+ const r=await fetch('/api/admin',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'setup',email:$('sEmail').value.trim(),senha:$('sSenha').value,codigo:$('sCodigo').value})});
+ const d=await r.json().catch(()=>({}));
+ if(r.ok){$('fSetup').hidden=true;$('lEmail').value=$('sEmail').value.trim();$('sForm').reset();views('vLogin');$('lMsg').className='msg';$('lMsg').textContent='Administrador cadastrado. Entre com o e-mail e a senha que você definiu.'}
+ else{m.className='msg err';m.textContent=d.erro||'Erro ao cadastrar.'}
+};
+route();
+</script>
 </body>
 </html>
