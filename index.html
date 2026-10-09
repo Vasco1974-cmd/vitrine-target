@@ -87,7 +87,7 @@ header{padding:10px 0}
 .hero{padding:8px 0 12px;max-width:720px}
 h1{font-size:clamp(1.35rem,2.6vw,1.9rem);margin:0 0 8px}
 .hero p{font-size:.92rem}
-.courses{max-width:900px;padding:8px 0 10px}
+.courses{max-width:1240px;padding:8px 0 10px}
 .card{padding:16px 20px}
 .card .sub{margin:0 0 10px}
 .stats{margin:0 0 10px}
@@ -131,7 +131,7 @@ footer{padding:10px 0;margin-top:0}
   <main id="vPublic">
   <section class="hero">
     <h1>Cursos práticos para decidir e executar melhor seus projetos</h1>
-    <p>Dois cursos online para quem trabalha com projetos e obras. Escolha o seu e comece hoje.</p>
+    <p>Três cursos online para quem trabalha com projetos, obras e gestão. Escolha o seu e comece hoje.</p>
   </section>
   <section class="courses">
     <article class="card">
@@ -157,8 +157,8 @@ footer{padding:10px 0;margin-top:0}
       </div>
     </article>
 
-    <article class="card test">
-      <h2>Analista de Planejamento de Engenharia e Controle de Obras</h2>
+    <article class="card">
+      <h2>Analista de Engenharia e Controle de Obras</h2>
       <p class="sub">Elabore licitações, orçamentos analíticos com BDI e acompanhe a obra com indicadores em tempo real.</p>
       <div class="stats">
         <div><b>BDI</b>orçamento</div>
@@ -175,6 +175,28 @@ footer{padding:10px 0;margin-top:0}
         <div class="btns">
           <a class="btn ghost" href="https://hotmart.com/pt-br/marketplace/produtos/curso-analista-de-engenharia-e-controle-de-obras/V107880213K" target="_blank" rel="noopener">Saiba mais</a>
           <a class="btn primary" href="https://analista-de-engenharia.vercel.app/" target="_blank" rel="noopener">Acessar</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card test">
+      <h2>Analista de Controladoria Pleno</h2>
+      <p class="sub">Domine orçamento, custos e indicadores para controlar resultados e apoiar as decisões da diretoria.</p>
+      <div class="stats">
+        <div><b>DRE</b>resultado</div>
+        <div><b>Desvios</b>orçado x realizado</div>
+        <div><b>KPIs</b>indicadores</div>
+      </div>
+      <ul>
+        <li>Orçamento e planejamento financeiro</li>
+        <li>Análise de desvios (orçado x realizado)</li>
+        <li>Indicadores e painéis de gestão</li>
+        <li>Custos, margens e fluxo de caixa</li>
+      </ul>
+      <div class="buy">
+        <div class="price">R$ 168,00<small>pagamento único</small></div>
+        <div class="btns">
+          <span class="btn soon" aria-disabled="true">Em breve</span>
         </div>
       </div>
     </article>
@@ -238,7 +260,8 @@ const SB_URL='COLE_AQUI_A_URL_DO_SUPABASE';
 const SB_KEY='COLE_AQUI_A_CHAVE_ANON_PUBLICA';
 const COURSES=[
 {id:'viabilidade',curto:'Viabilidade',nome:'Análise de Viabilidade Econômico-Financeira de Projetos',desc:'Indicadores financeiros, cenários e análises estratégicas.',url:'https://analise-viabilidade-two.vercel.app/',venda:'https://targetriorj.hotmart.host/analise-de-viabilidade-economico-financeira-de-projetos-594133bb-5cef-4cd5-9a11-d0378a970df7'},
-{id:'engenharia',curto:'Engenharia',nome:'Analista de Engenharia e Controle de Obras',desc:'Orçamentos com BDI, medições de campo e indicadores EVM.',url:'https://analista-de-engenharia.vercel.app/',venda:'https://hotmart.com/pt-br/marketplace/produtos/curso-analista-de-engenharia-e-controle-de-obras/V107880213K'}
+{id:'engenharia',curto:'Engenharia',nome:'Analista de Engenharia e Controle de Obras',desc:'Orçamentos com BDI, medições de campo e indicadores EVM.',url:'https://analista-de-engenharia.vercel.app/',venda:'https://hotmart.com/pt-br/marketplace/produtos/curso-analista-de-engenharia-e-controle-de-obras/V107880213K'},
+{id:'controladoria',curto:'Controladoria',nome:'Analista de Controladoria Pleno',desc:'Orçamento, custos, desvios e indicadores de gestão.',url:null,venda:null}
 ];
 const ready=!SB_URL.startsWith('COLE');
 const sb=ready?supabase.createClient(SB_URL,SB_KEY):null;
@@ -267,7 +290,7 @@ async function loadAluno(user){
  const mine=(data||[]).map(x=>x.curso);
  $('aCursos').innerHTML=COURSES.map(c=>{
   const ok=mine.includes(c.id);
-  const btn=ok?`<a class="btn primary" href="${c.url}" target="_blank" rel="noopener">Acessar</a>`
+  const btn=ok?(c.url?`<a class="btn primary" href="${c.url}" target="_blank" rel="noopener">Acessar</a>`:`<span class="btn soon">Em breve</span>`)
    :(c.venda?`<a class="btn ghost" href="${c.venda}" target="_blank" rel="noopener">Saiba mais</a>`:`<span class="btn soon">Em breve</span>`);
   return `<article class="card"><h2>${c.nome}</h2><p class="sub">${c.desc}</p><div class="buy"><span class="badge ${ok?'ok':'no'}">${ok?'Liberado':'Não adquirido'}</span>${btn}</div></article>`;
  }).join('');
