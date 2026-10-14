@@ -131,7 +131,7 @@ footer{padding:10px 0;margin-top:0}
   <main id="vPublic">
   <section class="hero">
     <h1>Cursos 100% práticos para Formação de Analistas.</h1>
-    <p>Três cursos online para quem trabalha com projetos, obras e gestão. Escolha o seu e comece hoje.</p>
+    <p>Quatro cursos online para quem trabalha com projetos, obras e gestão. Escolha o seu e comece hoje.</p>
   </section>
   <section class="courses">
     <article class="card">
@@ -189,6 +189,27 @@ footer{padding:10px 0;margin-top:0}
         <li>Análise de desvios (orçado x realizado)</li>
         <li>Indicadores e painéis de gestão</li>
         <li>Custos, margens e fluxo de caixa</li>
+      </ul>
+      <div class="buy">
+        <div class="price">R$ 168,00<small>pagamento único</small></div>
+        <div class="btns">
+          <a class="btn ghost" href="https://fpa-chi.vercel.app/" target="_blank" rel="noopener">Saiba mais</a>
+          </div>
+      </div>
+    </article>
+    <article class="card test">
+      <h2>Analista de Custos em Manufatura</h2>
+      <p class="sub">Domine custeio, rentabilidade por produto, estoques e desperdícios para proteger a margem da indústria.</p>
+      <div class="stats">
+        <div><b>ABC</b>custeio</div>
+        <div><b>CPV</b>custo do produto</div>
+        <div><b>Margem</b>por produto</div>
+      </div>
+      <ul>
+        <li>Metodologias de custeio: ABC, alvo, padrão e Kaizen</li>
+        <li>Rentabilidade por produto e linha de produção</li>
+        <li>Compras, estoque e eliminação de desperdícios</li>
+        <li>Calculadoras e práticas em cada aula</li>
       </ul>
       <div class="buy">
         <div class="price">R$ 168,00<small>pagamento único</small></div>
@@ -258,7 +279,8 @@ const SB_KEY='COLE_AQUI_A_CHAVE_ANON_PUBLICA';
 const COURSES=[
 {id:'viabilidade',curto:'Viabilidade',nome:'Análise de Viabilidade Econômico-Financeira de Projetos',desc:'Indicadores financeiros, cenários e análises estratégicas.',url:'https://analise-viabilidade-two.vercel.app/',venda:'https://targetriorj.hotmart.host/analise-de-viabilidade-economico-financeira-de-projetos-594133bb-5cef-4cd5-9a11-d0378a970df7'},
 {id:'engenharia',curto:'Engenharia',nome:'Analista de Engenharia e Controle de Projetos',desc:'Orçamentos com BDI, medições de campo e indicadores EVM.',url:'https://analista-de-engenharia.vercel.app/',venda:'https://hotmart.com/pt-br/marketplace/produtos/curso-analista-de-engenharia-e-controle-de-obras/V107880213K'},
-{id:'controladoria',curto:'Controladoria',nome:'Controladoria Avançada &amp; FP&amp;A',desc:'Orçamento, custos, desvios e indicadores de gestão.',url:'https://controladoria-iota.vercel.app/',venda:null}
+{id:'controladoria',curto:'Controladoria',nome:'Controladoria Avançada &amp; FP&amp;A',desc:'Orçamento, custos, desvios e indicadores de gestão.',url:'https://controladoria-iota.vercel.app/',venda:'https://fpa-chi.vercel.app/'},
+{id:'custos',curto:'Custos',nome:'Analista de Custos na Manufatura',desc:'Custeio, rentabilidade, estoques e desperdícios na indústria.',url:null,venda:null}
 ];
 const ready=!SB_URL.startsWith('COLE');
 const sb=ready?supabase.createClient(SB_URL,SB_KEY):null;
